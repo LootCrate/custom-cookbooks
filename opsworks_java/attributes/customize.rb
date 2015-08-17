@@ -1,1 +1,0 @@
-normal['opsworks_java']['jvm_version'] = '7'
