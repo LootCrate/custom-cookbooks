@@ -1,0 +1,47 @@
+<VirtualHost *:80>
+        ServerName <%= node['rundeck']['hostname'] %>
+        ServerAdmin <%= node['rundeck']['email'] %>
+<% if node['rundeck']['use_ssl'] %>
+        Redirect permanent / https://<%= node['rundeck']['hostname'] %>/
+</VirtualHost>
+
+<VirtualHost *:443>
+        ServerName <%= node['rundeck']['hostname'] %>
+        ServerAdmin <%= node['rundeck']['email'] %>
+<% end %>
+        ErrorLog <%= @log_dir %>/rundeck_error.log
+        TransferLog <%= @log_dir %>/rundeck_access.log
+<% if node['rundeck']['use_ssl'] %>
+
+        SSLEngine On
+        SSLCertificateFile <%= node['apache']['dir'] %>/ssl/<%= node['rundeck']['cert']['name'] %>.crt
+        SSLCertificateKeyFile <%= node['apache']['dir'] %>/ssl/<%= node['rundeck']['cert']['name'] %>.key
+<% unless node['rundeck']['cert']['ca_name'].nil? %>
+        SSLCertificateChainFile <%= node['apache']['dir'] %>/ssl/<%= node['rundeck']['cert']['ca_name'] %>.crt
+<% end %>
+<% end %>
+
+        DocumentRoot <%= @doc_root %>
+        ServerSignature On
+        
+        <Proxy *>
+                Order deny,allow
+                Allow from all
+        </Proxy>
+        
+        ProxyPass        <%= node['rundeck']['webcontext'] %> http://localhost:<%= node['rundeck']['port'] %><%= node['rundeck']['webcontext'] %>
+        ProxyPassReverse <%= node['rundeck']['webcontext'] %> http://localhost:<%= node['rundeck']['port'] %><%= node['rundeck']['webcontext'] %>
+        
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+        <Location /server-status>
+          SetHandler server-status
+
+          Order Deny,Allow
+          Deny from all
+          Allow from 127.0.0.1
+        </Location>
+        
+</VirtualHost>
