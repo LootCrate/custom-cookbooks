@@ -1,0 +1,45 @@
+- project: LootCrate
+  loglevel: DEBUG
+  sequence:
+    keepgoing: false
+    strategy: node-first
+    commands:
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+    - scriptfile: '/usr/local/bin/dodo.sh '
+      args: test
+  description: ''
+  name: Recurly - Transactions
+  group: Recurly

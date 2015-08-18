@@ -1,0 +1,48 @@
+- id: 9d4e6170-558a-4c6f-a288-c4e30d5c44f3
+  project: LootCrate
+  schedule:
+    time:
+      hour: 6-23
+      minute: '0'
+      seconds: '0'
+    month: '*'
+    year: '*'
+    weekday:
+      day: '*'
+  loglevel: DEBUG
+  sequence:
+    keepgoing: false
+    strategy: step-first
+    commands:
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_coupon_extract.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_coupon_extract.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_promotion_extract.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_promotion_txt_stage.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_promotion_usage_extract.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_promotion_usage_txt_stage.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_coupon_transform.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_coupon_publish.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_subscription_extract.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_subscription_txt_stage.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_recurly_accounts_extract.py
+    - scriptfile: /usr/local/bin/dodo.sh 
+      args: loot_recurly_accounts_txt_stage.py
+    - jobref:
+        group: Recurly
+        name: Recurly - Transactions
+        nodeStep: 'true'
+  description: ''
+  name: Loot - Promotion
+  uuid: 9d4e6170-558a-4c6f-a288-c4e30d5c44f3
+  group: Loot
