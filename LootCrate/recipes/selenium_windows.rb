@@ -9,7 +9,7 @@ selenium_node 'selenium_node' do
     },
     {
       browserName: 'internet explorer',
-      maxInstances: 1,
+      maxInstances: 5,
       seleniumProtocol: 'WebDriver'
     }
   ]
