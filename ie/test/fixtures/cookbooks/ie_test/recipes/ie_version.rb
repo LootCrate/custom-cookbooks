@@ -1,1 +1,0 @@
-log ie_version

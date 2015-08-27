@@ -165,15 +165,15 @@ framework.centraldispatcher.classname = com.dtolabs.client.services.RundeckAPICe
 #
 framework.server.username = admin
 framework.server.password = <%= (@rundeck_users['admin']['password'] rescue nil) || 'admin' %>
-framework.server.hostname = <%= @rundeck[:hostname] %>
+framework.server.hostname = <%= node.hostname %>
 framework.server.name = <%= node.hostname %>
 framework.server.port = <%= @rundeck[:port] %>
-framework.server.url = http://<%= @rundeck[:hostname] %>:<%= @rundeck[:port] %>
+framework.server.url = http://<%= node.hostname %>:<%= @rundeck[:port] %>
 
 #
 # URL to Rundeck
 #
-framework.rundeck.url = http://<%= @rundeck[:hostname] %>:<%= @rundeck[:port] %>
+framework.rundeck.url = http://<%= node.hostname %>:<%= @rundeck[:port] %>
 
 #
 # ssh keypath
