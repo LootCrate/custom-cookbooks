@@ -25,8 +25,7 @@
         ServerSignature On
         
         <Proxy *>
-                Order deny,allow
-                Allow from all
+                Require all granted
         </Proxy>
         
         ProxyPass        <%= node['rundeck']['webcontext'] %> http://localhost:<%= node['rundeck']['port'] %><%= node['rundeck']['webcontext'] %>
@@ -39,9 +38,7 @@
         <Location /server-status>
           SetHandler server-status
 
-          Order Deny,Allow
-          Deny from all
-          Allow from 127.0.0.1
+          Require host 127.0.0.1
         </Location>
         
 </VirtualHost>
