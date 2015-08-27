@@ -247,36 +247,37 @@ service 'rundeckd' do
   action :start
 end
 
-bags = data_bag(node['rundeck']['rundeck_projects_databag'])
-
-# projects = {}
-bags.each do |project|
-  pdata = data_bag_item(node['rundeck']['rundeck_projects_databag'], project)
-  custom = ''
-  unless pdata['project_settings'].nil?
-    pdata['project_settings'].map do |key, val|
-      custom += " --#{key}=#{val}"
+if node['rundeck']['create_projects'] == true do
+  bags = data_bag(node['rundeck']['rundeck_projects_databag'])
+  
+  # projects = {}
+  bags.each do |project|
+    pdata = data_bag_item(node['rundeck']['rundeck_projects_databag'], project)
+    custom = ''
+    unless pdata['project_settings'].nil?
+      pdata['project_settings'].map do |key, val|
+        custom += " --#{key}=#{val}"
+      end
     end
-  end
-
-  cmd = <<-EOH.to_s
-  rd-project -p #{project} -a create \
-  --resources.source.1.type=url \
-  --resources.source.1.config.includeServerNode=true \
-  --resources.source.1.config.generateFileAutomatically=true \
-  --resources.source.1.config.url=#{pdata['chef_rundeck_url'].nil? ? node['rundeck']['chef_rundeck_url'] : pdata['chef_rundeck_url']}/#{project} \
-  --project.resources.file=#{node['rundeck']['datadir']}/projects/#{project}/etc/resources.xml #{custom}
-  EOH
-
-  bash "check-project-#{project}" do
-    user node['rundeck']['user']
-    code cmd
-    not_if do
-      File.exist?("#{node['rundeck']['datadir']}/projects/#{project}/etc/project.properties")
+  
+    cmd = <<-EOH.to_s
+    rd-project -p #{project} -a create \
+    --resources.source.1.type=url \
+    --resources.source.1.config.includeServerNode=true \
+    --resources.source.1.config.generateFileAutomatically=true \
+    --resources.source.1.config.url=#{pdata['chef_rundeck_url'].nil? ? node['rundeck']['chef_rundeck_url'] : pdata['chef_rundeck_url']}/#{project} \
+    --project.resources.file=#{node['rundeck']['datadir']}/projects/#{project}/etc/resources.xml #{custom}
+    EOH
+  
+    bash "check-project-#{project}" do
+      user node['rundeck']['user']
+      code cmd
+      not_if do
+        File.exist?("#{node['rundeck']['datadir']}/projects/#{project}/etc/project.properties")
+      end
     end
   end
 end
-
 # Plugins
 #remote_file  'rundeck-slack-incoming-webhook-plugin' do
   #source node['rundeck']['plugin']['slack']
