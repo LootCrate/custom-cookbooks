@@ -247,7 +247,7 @@ service 'rundeckd' do
   action :start
 end
 
-if node['rundeck']['create_projects'] == true do
+if node['rundeck']['create_projects'] == true
   bags = data_bag(node['rundeck']['rundeck_projects_databag'])
   
   # projects = {}
