@@ -1,5 +1,4 @@
-- id: 9d4e6170-558a-4c6f-a288-c4e30d5c44f3
-  project: LootCrate
+- project: LootCrate
   schedule:
     time:
       hour: 6-23
@@ -44,5 +43,4 @@
         nodeStep: 'true'
   description: ''
   name: Loot - Promotion
-  uuid: 9d4e6170-558a-4c6f-a288-c4e30d5c44f3
   group: Loot
