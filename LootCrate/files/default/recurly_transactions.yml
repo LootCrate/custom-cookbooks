@@ -1,5 +1,4 @@
-- id: bafdb9d3-a9eb-4f68-94a7-749f174d4ef9
-  project: LootCrate
+- project: LootCrate
   loglevel: DEBUG
   sequence:
     keepgoing: false
@@ -41,7 +40,6 @@
       args: recurly_customer_transform.py
     - scriptfile: /usr/local/bin/dodo.sh
       args: recurly_customer_publish.py
-  description: ''
+  description:
   name: Recurly - Transactions
-  uuid: bafdb9d3-a9eb-4f68-94a7-749f174d4ef9
   group: Recurly
