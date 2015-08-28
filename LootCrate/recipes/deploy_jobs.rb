@@ -7,14 +7,14 @@ directory "/home/#{user}/jobs" do
   action :create
 end
 
-cookbook_file "node['rundeck-jobs-dir']/loot_promo.yml" do
+cookbook_file "#{node['rundeck-jobs-dir']}/loot_promo.yml" do
   source 'loot_promo.yml'
   owner user
   group user
   mode '0644'
 end
 
-cookbook_file "node['rundeck-jobs-dir']/recurly_transactions.yml" do
+cookbook_file "#{node['rundeck-jobs-dir']}/recurly_transactions.yml" do
   source 'recurly_transactions.yml.yml'
   owner user
   group user
