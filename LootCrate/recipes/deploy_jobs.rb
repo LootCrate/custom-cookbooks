@@ -15,7 +15,7 @@ cookbook_file "#{node['rundeck-jobs-dir']}/loot_promo.yml" do
 end
 
 cookbook_file "#{node['rundeck-jobs-dir']}/recurly_transactions.yml" do
-  source 'recurly_transactions.yml.yml'
+  source 'recurly_transactions.yml'
   owner user
   group user
   mode '0644'
