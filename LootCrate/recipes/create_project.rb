@@ -11,7 +11,7 @@ cmd = <<-EOH.to_s
     EOH
 
 bash "check-project-#{project}" do
-  user 'rundeck'
+  user node['rundeck']['user']
   code cmd
   not_if do
     File.exist?("#{node['rundeck']['datadir']}/projects/#{project}/etc/project.properties")
