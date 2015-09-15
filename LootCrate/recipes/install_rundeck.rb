@@ -6,8 +6,6 @@ remote_file '/tmp/rundeck.deb' do
   action :create
 end
 
-
-
 package 'rundeck' do
   source '/tmp/rundeck.deb'
   action :install
