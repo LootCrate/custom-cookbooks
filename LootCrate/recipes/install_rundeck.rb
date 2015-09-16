@@ -10,3 +10,15 @@ dpkg_package 'rundeck' do
   source '/tmp/rundeck.deb'
   action :install
 end
+
+service 'rundeckd' do
+  supports :status => true, :restart => true
+  action [:start, :enable]
+end
+
+template '/etc/rundeck/rundeck-configure.properties' do
+  source 'rundeck-configure.properties.erb'
+  owner 'rundeck'
+  group 'rundeck'
+  mode '0640'
+end
