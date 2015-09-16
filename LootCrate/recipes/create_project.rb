@@ -11,7 +11,7 @@ cmd = <<-EOH.to_s
     EOH
 
 bash "check-project-#{project}" do
-  user rundeck
+  user "rundeck"
   code cmd
   not_if do
     File.exist?("/var/rundeck/projects/#{project}/etc/project.properties")
