@@ -16,8 +16,8 @@ service 'rundeckd' do
   action [:start, :enable]
 end
 
-template '/etc/rundeck/rundeck-configure.properties' do
-  source 'rundeck-configure.properties.erb'
+template '/etc/rundeck/rundeck-config.properties' do
+  source 'rundeck-config.properties.erb'
   owner 'rundeck'
   group 'rundeck'
   mode '0640'
