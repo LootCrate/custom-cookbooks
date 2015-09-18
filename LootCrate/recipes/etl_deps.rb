@@ -7,6 +7,6 @@ end
 node['etl_pip_packages'].each do |pkg|
     execute "install-#{pkg}" do
         command "pip install #{pkg}"
-        #not_if "[ `pip freeze | grep #{pkg} | cut -d'=' -f3` = '#{version}' ]"
+        not_if 'pip freeze | grep #{pkg}'
     end
 end
