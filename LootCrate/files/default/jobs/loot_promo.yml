@@ -1,0 +1,46 @@
+- project: LootCrate
+  schedule:
+    time:
+      hour: 6-23
+      minute: '0'
+      seconds: '0'
+    month: '*'
+    year: '*'
+    weekday:
+      day: '*'
+  loglevel: DEBUG
+  sequence:
+    keepgoing: false
+    strategy: step-first
+    commands:
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_coupon_extract.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_coupon_extract.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_promotion_extract.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_promotion_txt_stage.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_promotion_usage_extract.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_promotion_usage_txt_stage.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_coupon_transform.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_coupon_publish.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_subscription_extract.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_subscription_txt_stage.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_recurly_accounts_extract.py
+    - scriptfile: /home/rundeck/etl/etl_home/dodo_home/dodo.sh
+      args: /home/rundeck/etl/etl_home/scripts/loot/loot_recurly_accounts_txt_stage.py
+    - jobref:
+        group: Recurly
+        name: Recurly - Transactions
+        nodeStep: 'true'
+  description: ''
+  name: Loot - Promotion
+  group: Loot
