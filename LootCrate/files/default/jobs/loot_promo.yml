@@ -8,7 +8,7 @@
     year: '*'
     weekday:
       day: '*'
-  loglevel: DEBUG
+  loglevel: INFO
   sequence:
     keepgoing: false
     strategy: step-first

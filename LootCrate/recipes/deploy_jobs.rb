@@ -9,6 +9,17 @@ directory "/home/#{user}/jobs" do
   action :create
 end
 
+remote_directory '/home/#{user}/jobs' do
+  source 'jobs'
+  files_owner user
+  files_group user
+  files_mode '0644'
+  owner user
+  group user
+  mode '0755'
+end
+
+
 #file "/home/#{user}/git_wrapper.sh" do
 #  action :create
 #  owner user
