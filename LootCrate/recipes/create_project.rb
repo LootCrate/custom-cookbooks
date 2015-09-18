@@ -1,8 +1,9 @@
-project = node['rundeck-project']
+project = node['rundeck']['project']
+user = node['rundeck']['user']
 
 cmd = <<-EOH.to_s
     rd-project -p #{project} -a create \
-    --resources.source.1.config.file=/var/rundeck/projects/LootCrate/etc/resources.yml \
+    --resources.source.1.config.file=/var/rundeck/projects/#{project}/etc/resources.yml \
     --resources.source.1.config.format=resourceyaml \
     --resources.source.1.config.generateFileAutomatically=true \
     --resources.source.1.config.includeServerNode=true \
@@ -11,7 +12,7 @@ cmd = <<-EOH.to_s
     EOH
 
 bash "check-project-#{project}" do
-  user "rundeck"
+  user user
   code cmd
   not_if do
     File.exist?("/var/rundeck/projects/#{project}/etc/project.properties")
