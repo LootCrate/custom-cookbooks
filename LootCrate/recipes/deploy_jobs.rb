@@ -1,5 +1,7 @@
 user = "rundeck"
 
+include_recipe 'LootCrate::etl_deps'
+
 directory "/home/#{user}/jobs" do
   owner user
   group user
