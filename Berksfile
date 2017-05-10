@@ -1,7 +1,7 @@
 source "https://supermarket.chef.io"
 
 cookbook 'java', '= 1.47.0'
-cookbook 'selenium', '= 3.7.1
+cookbook 'selenium', '= 3.7.1'
 cookbook 'xvfb', '= 2.1.1'
 cookbook 'firefox', '= 2.0.7'
 cookbook 'varnish', '= 2.0.0'
